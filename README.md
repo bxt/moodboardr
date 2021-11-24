@@ -22,6 +22,12 @@ node --require esbuild-register prisma/seed.ts
 
 To see the contents of the database use `npx prisma studio`. You can remove the `prisma/dev.db` file at any time to start over.
 
+If you do not have eslint running in your editor, you should run it manually from time to time:
+
+```sh
+npm run format
+```
+
 ## Deployment
 
 First, build your app for production:
