@@ -11,7 +11,7 @@ type IndexData = {
 // https://remix.run/api/conventions#loader
 export const loader: LoaderFunction = () => {
   const data: IndexData = {
-    greeting: 'Great that you&apos;re here. 🥳',
+    greeting: "Great that you're here. 🥳",
   };
 
   // https://remix.run/api/remix#json

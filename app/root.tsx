@@ -8,9 +8,13 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
   useLocation,
+  json,
 } from 'remix';
-import type { MetaFunction, LinksFunction } from 'remix';
+import type { MetaFunction, LinksFunction, LoaderFunction } from 'remix';
+import { db } from '~/utils/db.server';
+import { getUser } from '~/utils/session.server';
 
 import globalStylesUrl from '~/styles/global.css';
 import darkStylesUrl from '~/styles/dark.css';
@@ -45,15 +49,34 @@ export const meta: MetaFunction = () => {
   };
 };
 
+type RootData = {
+  user: {
+    username: string;
+    id: string;
+  } | null;
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request);
+
+  const data: RootData = {
+    user,
+  };
+
+  // https://remix.run/api/remix#json
+  return json(data);
+};
+
 /**
  * The root module's default export is a component that renders the current
  * route via the `<Outlet />` component. Think of this as the global layout
  * component for your app.
  */
 export default function App() {
+  const { user } = useLoaderData<RootData>();
   return (
     <Document>
-      <Layout>
+      <Layout user={user}>
         <Outlet />
       </Layout>
     </Document>
@@ -87,7 +110,15 @@ function Document({
   );
 }
 
-function Layout({ children }: React.PropsWithChildren<unknown>) {
+function Layout({
+  children,
+  user,
+}: React.PropsWithChildren<{
+  user?: {
+    username: string;
+    id: string;
+  } | null;
+}>) {
   return (
     <div className="moodboardr">
       <header className="moodboardr__header">
@@ -113,6 +144,20 @@ function Layout({ children }: React.PropsWithChildren<unknown>) {
               <li>
                 <Link to="/">Patterns</Link>
               </li>
+              {user === undefined ? null : user ? (
+                <li>
+                  <Link to={`/user/${user.username}`}>{user.username}</Link>
+                  <form action="/logout" method="post">
+                    <button type="submit" className="button">
+                      Logout
+                    </button>
+                  </form>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/login">login</Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
