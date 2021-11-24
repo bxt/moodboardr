@@ -1,6 +1,6 @@
-# Welcome to Remix!
+# Welcome to moodboardr!
 
-- [Remix Docs](https://remix.run/docs)
+This is an app to manage colors, color boards and patterns. It is build using [Remix](https://remix.run/docs) as a framework for making React do its thing and [Prisma](https://www.prisma.io/docs/reference) for managing an SqLite database.
 
 ## Development
 
