@@ -1,0 +1,58 @@
+/*
+ * You probably want to just delete this file; it's just for the demo pages.
+ */
+.moodboardr {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-bottom));
+}
+
+.moodboardr > * {
+  width: 100%;
+}
+
+.moodboardr__header {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.moodboardr__header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moodboardr__header-home-link {
+  color: var(--color-foreground);
+  font-size: 2rem;
+}
+
+.moodboardr__header-nav ul {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.moodboardr__header-nav li {
+  font-weight: bold;
+}
+
+.moodboardr__main {
+  flex: 1 1 100%;
+}
+
+.moodboardr__footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.moodboardr__footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
