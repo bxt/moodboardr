@@ -102,7 +102,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 <Link to="/">Boards</Link>
               </li>
               <li>
-                <Link to="/">Colors</Link>
+                <Link to="/colors">Colors</Link>
               </li>
               <li>
                 <Link to="/">Patterns</Link>
