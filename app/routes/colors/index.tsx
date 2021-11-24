@@ -35,8 +35,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   const color = matchData.groups.color;
 
-  console.log("hello???", {formData, color})
-
   return redirect(`/colors/${color}`);
 };
 
