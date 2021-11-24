@@ -12,6 +12,16 @@ npm run dev
 
 This starts your app in development mode, rebuilding assets on file changes.
 
+To initialize the database use:
+
+```sh
+touch .env
+npx prisma db push
+node --require esbuild-register prisma/seed.ts
+```
+
+To see the contents of the database use `npx prisma studio`. You can remove the `prisma/dev.db` file at any time to start over.
+
 ## Deployment
 
 First, build your app for production:
