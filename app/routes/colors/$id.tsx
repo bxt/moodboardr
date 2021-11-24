@@ -1,4 +1,4 @@
-import { useCatch, Link, Form, json, useLoaderData } from 'remix';
+import { Link, Form, json, useLoaderData } from 'remix';
 import type { LoaderFunction, MetaFunction } from 'remix';
 import { db } from '~/utils/db.server';
 
@@ -51,10 +51,10 @@ export default function ColorsId() {
       <h1>
         The color is <i style={{ color: `#${color}` }}>#{color}</i>
       </h1>
-      <p>It's known by many names:</p>
+      <p>It&apos;s known by many names:</p>
       <ul>
         {colorNames.map(({ name, glossarist: { username } }) => (
-          <li>
+          <li key={username}>
             {name} by {username}
           </li>
         ))}

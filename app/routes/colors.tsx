@@ -4,7 +4,7 @@ import { Outlet } from 'remix';
 // Somehow Remix wants the action here or in index depending on how it's called
 export { action } from './colors/index';
 
-export const meta: MetaFunction = ({ data }) => {
+export const meta: MetaFunction = () => {
   return { title: 'Colors on moodboardr' };
 };
 

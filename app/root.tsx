@@ -72,6 +72,7 @@ function Document({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
@@ -86,7 +87,7 @@ function Document({
   );
 }
 
-function Layout({ children }: React.PropsWithChildren<{}>) {
+function Layout({ children }: React.PropsWithChildren<unknown>) {
   return (
     <div className="moodboardr">
       <header className="moodboardr__header">
@@ -194,6 +195,7 @@ function MoodboardrLogo() {
 /**
  * Provides an alert for screen reader users when the route changes.
  */
+// eslint-disable-next-line react/display-name
 const RouteChangeAnnouncement = React.memo(() => {
   const [hydrated, setHydrated] = React.useState(false);
   const [innerHtml, setInnerHtml] = React.useState('');
