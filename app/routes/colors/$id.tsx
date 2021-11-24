@@ -39,7 +39,7 @@ export default function ParamDemo() {
 // https://remix.run/api/remix#usecatch
 // https://remix.run/api/guides/not-found
 export function CatchBoundary() {
-  let caught = useCatch();
+  const caught = useCatch();
 
   let message: React.ReactNode;
   switch (caught.status) {
