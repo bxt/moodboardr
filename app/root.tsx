@@ -131,10 +131,13 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
+// https://remix.run/api/conventions#catchboundary
+// https://remix.run/api/remix#usecatch
+// https://remix.run/api/guides/not-found
 export function CatchBoundary() {
   const caught = useCatch();
 
-  let message;
+  let message: React.ReactNode;
   switch (caught.status) {
     case 401:
       message = (
@@ -149,7 +152,6 @@ export function CatchBoundary() {
         <p>Oops! Looks like you tried to visit a page that does not exist.</p>
       );
       break;
-
     default:
       throw new Error(caught.data || caught.statusText);
   }

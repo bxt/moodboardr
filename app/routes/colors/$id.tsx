@@ -67,63 +67,6 @@ export default function ColorsId() {
   );
 }
 
-// https://remix.run/api/conventions#catchboundary
-// https://remix.run/api/remix#usecatch
-// https://remix.run/api/guides/not-found
-export function CatchBoundary() {
-  const caught = useCatch();
-
-  let message: React.ReactNode;
-  switch (caught.status) {
-    case 401:
-      message = (
-        <p>
-          Looks like you tried to visit a page that you do not have access to.
-          Maybe ask the webmaster ({caught.data.webmasterEmail}) for access.
-        </p>
-      );
-    case 404:
-      message = (
-        <p>Looks like you tried to visit a page that does not exist.</p>
-      );
-    default:
-      message = (
-        <p>
-          There was a problem with your request!
-          <br />
-          {caught.status} {caught.statusText}
-        </p>
-      );
-  }
-
-  return (
-    <>
-      <h2>Oops!</h2>
-      <p>{message}</p>
-      <p>
-        (Isn't it cool that the user gets to stay in context and try a different
-        link in the parts of the UI that didn't blow up?)
-      </p>
-    </>
-  );
-}
-
-// https://remix.run/api/conventions#errorboundary
-// https://remix.run/api/guides/not-found
-export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error);
-  return (
-    <>
-      <h2>Error!</h2>
-      <p>{error.message}</p>
-      <p>
-        (Isn't it cool that the user gets to stay in context and try a different
-        link in the parts of the UI that didn't blow up?)
-      </p>
-    </>
-  );
-}
-
 export const meta: MetaFunction = ({ data }) => {
   return {
     title: data ? `Color #${data.color} on moodboardr` : 'Oops...',
