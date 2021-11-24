@@ -1,8 +1,11 @@
-import type { LoaderFunction, ActionFunction } from "remix";
-import { useLoaderData, json, Link, Form, redirect } from "remix";
-import { db } from "~/utils/db.server";
+import type { LoaderFunction, ActionFunction } from 'remix';
+import { useLoaderData, json, Link, Form, redirect } from 'remix';
+import { db } from '~/utils/db.server';
 
-const randomColor = () => [...Array(6).keys()].map(() => Math.floor(Math.random()*16).toString(16)).join('');
+const randomColor = () =>
+  [...Array(6).keys()]
+    .map(() => Math.floor(Math.random() * 16).toString(16))
+    .join('');
 
 type ColorsIndexData = {
   namedColors: {
@@ -17,7 +20,7 @@ export const loader: LoaderFunction = async () => {
     namedColors: await db.colorName.findMany({
       take: 10,
       select: { color: true, name: true },
-      orderBy: { createdAt: "desc" }
+      orderBy: { createdAt: 'desc' },
     }),
     randomColors: [...Array(10).keys()].map(() => randomColor()),
   };
@@ -31,16 +34,16 @@ export const loader: LoaderFunction = async () => {
 // - https://remix.run/guides/data-updates
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const hexColor = formData.get("hexColor");
+  const hexColor = formData.get('hexColor');
 
-  if (typeof hexColor !== "string") {
-    return json("Hex color must be a string", { status: 400 });
+  if (typeof hexColor !== 'string') {
+    return json('Hex color must be a string', { status: 400 });
   }
 
   const matchData = hexColor.match(/#(?<color>[a-f0-9]{6})/);
 
   if (!matchData || !matchData.groups) {
-    return json("Hex color must be in format #000000", { status: 400 });
+    return json('Hex color must be in format #000000', { status: 400 });
   }
 
   const color = matchData.groups.color;
@@ -48,39 +51,42 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect(`/colors/${color}`);
 };
 
-
 export default function ColorsIndex() {
-  const {randomColors, namedColors} = useLoaderData<ColorsIndexData>();
+  const { randomColors, namedColors } = useLoaderData<ColorsIndexData>();
 
   return (
     <div>
-      <p>
-        Here are some recently named colors:
-      </p>
+      <p>Here are some recently named colors:</p>
       <ul>
-        {namedColors.map(({color, name}) => (
+        {namedColors.map(({ color, name }) => (
           <li key={color}>
-            <Link to={color}>{'#'}{color} aka {name}</Link>
+            <Link to={color}>
+              {'#'}
+              {color} aka {name}
+            </Link>
           </li>
         ))}
       </ul>
-      <p>
-        Here are some random colors:
-      </p>
+      <p>Here are some random colors:</p>
       <ul>
         {randomColors.map((color) => (
           <li key={color}>
-            <Link to={color}>{'#'}{color}</Link>
+            <Link to={color}>
+              {'#'}
+              {color}
+            </Link>
           </li>
         ))}
       </ul>
       <p>
-        <strong>
-          Check out one of them.
-        </strong>
+        <strong>Check out one of them.</strong>
       </p>
       <Form method="post">
-        <input type="color" name="hexColor" defaultValue={`#${randomColor()}`} />
+        <input
+          type="color"
+          name="hexColor"
+          defaultValue={`#${randomColor()}`}
+        />
         <input type="submit" />
       </Form>
     </div>

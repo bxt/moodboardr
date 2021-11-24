@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Link,
   Links,
@@ -8,13 +8,13 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-  useLocation
-} from "remix";
-import type { MetaFunction, LinksFunction } from "remix";
+  useLocation,
+} from 'remix';
+import type { MetaFunction, LinksFunction } from 'remix';
 
-import globalStylesUrl from "~/styles/global.css";
-import darkStylesUrl from "~/styles/dark.css";
-import moodboardrStylesUrl from "~/styles/moodboardr.css";
+import globalStylesUrl from '~/styles/global.css';
+import darkStylesUrl from '~/styles/dark.css';
+import moodboardrStylesUrl from '~/styles/moodboardr.css';
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -26,21 +26,22 @@ import moodboardrStylesUrl from "~/styles/moodboardr.css";
  */
 export const links: LinksFunction = () => {
   return [
-    { rel: "stylesheet", href: globalStylesUrl },
+    { rel: 'stylesheet', href: globalStylesUrl },
     {
-      rel: "stylesheet",
+      rel: 'stylesheet',
       href: darkStylesUrl,
-      media: "(prefers-color-scheme: dark)"
+      media: '(prefers-color-scheme: dark)',
     },
-    { rel: "stylesheet", href: moodboardrStylesUrl }
+    { rel: 'stylesheet', href: moodboardrStylesUrl },
   ];
 };
 
 // https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {
   return {
-    title: "moodboardr",
-    description: "Welcome to moodboardr! A place where you can collect colors and more."
+    title: 'moodboardr',
+    description:
+      'Welcome to moodboardr! A place where you can collect colors and more.',
   };
 };
 
@@ -61,7 +62,7 @@ export default function App() {
 
 function Document({
   children,
-  title
+  title,
 }: {
   children: React.ReactNode;
   title?: string;
@@ -79,7 +80,7 @@ function Document({
         <RouteChangeAnnouncement />
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );
@@ -90,7 +91,11 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
     <div className="moodboardr">
       <header className="moodboardr__header">
         <div className="container moodboardr__header-content">
-          <Link to="/" title="Moodboardr Homepage" className="moodboardr__header-home-link">
+          <Link
+            to="/"
+            title="Moodboardr Homepage"
+            className="moodboardr__header-home-link"
+          >
             <MoodboardrLogo />
           </Link>
           <nav aria-label="Main navigation" className="moodboardr__header-nav">
@@ -116,7 +121,10 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
       </div>
       <footer className="moodboardr__footer">
         <div className="container moodboardr__footer-content">
-          <p>&copy; 2021 by <a href="https://github.com/bxt">Bernhard Häussner</a></p>
+          <p>
+            &copy; 2021 by{' '}
+            <a href="https://github.com/bxt">Bernhard Häussner</a>
+          </p>
         </div>
       </footer>
     </div>
@@ -186,7 +194,7 @@ function MoodboardrLogo() {
  */
 const RouteChangeAnnouncement = React.memo(() => {
   const [hydrated, setHydrated] = React.useState(false);
-  const [innerHtml, setInnerHtml] = React.useState("");
+  const [innerHtml, setInnerHtml] = React.useState('');
   const location = useLocation();
 
   React.useEffect(() => {
@@ -202,7 +210,7 @@ const RouteChangeAnnouncement = React.memo(() => {
       return;
     }
 
-    const pageTitle = location.pathname === "/" ? "Home page" : document.title;
+    const pageTitle = location.pathname === '/' ? 'Home page' : document.title;
     setInnerHtml(`Navigated to ${pageTitle}`);
   }, [location.pathname]);
 
@@ -218,17 +226,17 @@ const RouteChangeAnnouncement = React.memo(() => {
       aria-atomic
       id="route-change-region"
       style={{
-        border: "0",
-        clipPath: "inset(100%)",
-        clip: "rect(0 0 0 0)",
-        height: "1px",
-        margin: "-1px",
-        overflow: "hidden",
-        padding: "0",
-        position: "absolute",
-        width: "1px",
-        whiteSpace: "nowrap",
-        wordWrap: "normal"
+        border: '0',
+        clipPath: 'inset(100%)',
+        clip: 'rect(0 0 0 0)',
+        height: '1px',
+        margin: '-1px',
+        overflow: 'hidden',
+        padding: '0',
+        position: 'absolute',
+        width: '1px',
+        whiteSpace: 'nowrap',
+        wordWrap: 'normal',
       }}
     >
       {innerHtml}

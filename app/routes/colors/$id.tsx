@@ -1,13 +1,13 @@
-import { useCatch, Link, Form, json, useLoaderData } from "remix";
-import type { LoaderFunction, MetaFunction } from "remix";
-import { db } from "~/utils/db.server";
+import { useCatch, Link, Form, json, useLoaderData } from 'remix';
+import type { LoaderFunction, MetaFunction } from 'remix';
+import { db } from '~/utils/db.server';
 
 type ColorsIdData = {
   color: string;
   colorNames: {
     name: string;
     glossarist: {
-        username: string;
+      username: string;
     };
   }[];
 };
@@ -17,12 +17,12 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   // now pretend like the record exists but the user just isn't authorized to
   // see it.
-  if (params.id === "forbidden") {
-    throw json({ webmasterEmail: "hello@remix.run" }, { status: 401 });
+  if (params.id === 'forbidden') {
+    throw json({ webmasterEmail: 'hello@remix.run' }, { status: 401 });
   }
 
   if (!params.id?.match?.(/[0-9a-f]{6}/)) {
-    throw new Response("Not Found", { status: 404 });
+    throw new Response('Not Found', { status: 404 });
   }
 
   const color = params.id;
@@ -33,7 +33,7 @@ export const loader: LoaderFunction = async ({ params }) => {
       take: 10,
       select: { name: true, glossarist: { select: { username: true } } },
       where: { color },
-      orderBy: { createdAt: "desc" }
+      orderBy: { createdAt: 'desc' },
     }),
   };
 
@@ -53,8 +53,10 @@ export default function ColorsId() {
       </h1>
       <p>It's known by many names:</p>
       <ul>
-        {colorNames.map(({name, glossarist: {username}}) => (
-          <li>{name} by {username}</li>
+        {colorNames.map(({ name, glossarist: { username } }) => (
+          <li>
+            {name} by {username}
+          </li>
         ))}
       </ul>
       <Form method="post" action="..">
@@ -124,6 +126,6 @@ export function ErrorBoundary({ error }: { error: Error }) {
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: data ? `Color #${data.color} on moodboardr` : "Oops...",
+    title: data ? `Color #${data.color} on moodboardr` : 'Oops...',
   };
 };

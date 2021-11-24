@@ -1,11 +1,13 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User } from '@prisma/client';
 const db = new PrismaClient();
 
 async function seed() {
-  const bxt = await db.user.create({ data: {
-    username: "bxt",
-    passwordHash: "secret"
-  }});
+  const bxt = await db.user.create({
+    data: {
+      username: 'bxt',
+      passwordHash: 'secret',
+    },
+  });
 
   for (const colorName of getColorNames({ bxt })) {
     await db.colorName.create({ data: colorName });
