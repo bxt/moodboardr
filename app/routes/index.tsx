@@ -46,14 +46,6 @@ export let loader: LoaderFunction = () => {
   return json(data);
 };
 
-// https://remix.run/api/conventions#meta
-export let meta: MetaFunction = () => {
-  return {
-    title: "Remix Starter",
-    description: "Welcome to remix!"
-  };
-};
-
 // https://remix.run/guides/routing#index-routes
 export default function Index() {
   let data = useLoaderData<IndexData>();

@@ -10,11 +10,11 @@ import {
   useCatch,
   useLocation
 } from "remix";
-import type { LinksFunction } from "remix";
+import type { MetaFunction, LinksFunction } from "remix";
 
 import globalStylesUrl from "~/styles/global.css";
 import darkStylesUrl from "~/styles/dark.css";
-import moodboardrStylesUrl from "~/styles/demos/remix.css";
+import moodboardrStylesUrl from "~/styles/moodboardr.css";
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -34,6 +34,14 @@ export let links: LinksFunction = () => {
     },
     { rel: "stylesheet", href: moodboardrStylesUrl }
   ];
+};
+
+// https://remix.run/api/conventions#meta
+export let meta: MetaFunction = () => {
+  return {
+    title: "moodboardr",
+    description: "Welcome to moodboardr! A place where you can collect colors and more."
+  };
 };
 
 /**
@@ -63,7 +71,6 @@ function Document({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
