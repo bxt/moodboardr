@@ -10,7 +10,8 @@
     "build": "remix build",
     "dev": "remix dev",
     "postinstall": "remix setup node",
-    "start": "remix-serve build"
+    "start": "remix-serve build",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@prisma/client": "^3.5.0",
