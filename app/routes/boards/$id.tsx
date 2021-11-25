@@ -60,7 +60,7 @@ export default function BoardsId() {
   return (
     <>
       <h1>
-        <Link to="..">Boards</Link> &raquo; #{name}
+        <Link to="..">Boards</Link> &raquo; {name}
       </h1>
       <p>
         Created by <Link to={`/users/${username}`}>{username}</Link> at{' '}
@@ -99,6 +99,6 @@ export default function BoardsId() {
 
 export const meta: MetaFunction = ({ data }: { data: BoardsIdData | null }) => {
   return {
-    title: data ? `Board #${data.board.name} on moodboardr` : 'Oops...',
+    title: data ? `Board ${data.board.name} on moodboardr` : 'Oops...',
   };
 };
