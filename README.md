@@ -28,6 +28,10 @@ If you do not have eslint running in your editor, you should run it manually fro
 npm run format
 ```
 
+<details>
+
+<summary>Deployment (coming soon)</summary>
+
 ## Deployment
 
 First, build your app for production:
@@ -67,3 +71,4 @@ rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
 ```
+</details>
