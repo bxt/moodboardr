@@ -8,27 +8,49 @@ const randomColor = () =>
     .join('');
 
 type ColorsIndexData = {
-  namedColors: {
+  recentlyNamedColors: {
     color: string;
     name: string;
     glossarist: {
       username: string;
     };
   }[];
+  mostNamedColors: {
+    color: string;
+    _count: {
+      glossaristId: number;
+    };
+  }[];
   randomColors: string[];
 };
 
 export const loader: LoaderFunction = async () => {
-  const data: ColorsIndexData = {
-    namedColors: await prisma.colorName.findMany({
-      take: 10,
-      select: {
-        color: true,
-        name: true,
-        glossarist: { select: { username: true } },
+  const recentlyNamedColors = await prisma.colorName.findMany({
+    take: 10,
+    select: {
+      color: true,
+      name: true,
+      glossarist: { select: { username: true } },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  const mostNamedColors = await prisma.colorName.groupBy({
+    by: ['color'],
+    _count: {
+      glossaristId: true,
+    },
+    orderBy: {
+      _count: {
+        glossaristId: 'desc',
       },
-      orderBy: { createdAt: 'desc' },
-    }),
+    },
+    take: 7,
+  });
+
+  const data: ColorsIndexData = {
+    recentlyNamedColors,
+    mostNamedColors,
     randomColors: [...Array(30).keys()].map(() => randomColor()),
   };
 
@@ -59,7 +81,9 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function ColorsIndex() {
-  const { randomColors, namedColors } = useLoaderData<ColorsIndexData>();
+  const { randomColors, recentlyNamedColors, mostNamedColors } =
+    useLoaderData<ColorsIndexData>();
+  console.log({ mostNamedColors });
 
   return (
     <div>
@@ -79,7 +103,30 @@ export default function ColorsIndex() {
       <h1>Colors</h1>
       <p>Here are some recently named colors:</p>
       <ul className="moodboardr__colorlist">
-        {namedColors.map(({ color, name, glossarist: { username } }) => (
+        {recentlyNamedColors.map(
+          ({ color, name, glossarist: { username } }) => (
+            <li key={color}>
+              <Link to={color}>
+                <span
+                  className="moodboardr__colorlist-preview"
+                  style={{ backgroundColor: `#${color}` }}
+                />
+                <span className="moodboardr__colorlist-hex">
+                  {'#'}
+                  {color}
+                </span>
+                <span className="moodboardr__colorlist-name">{name}</span>
+              </Link>
+              <span>
+                by <Link to={`/users/${username}`}>{username}</Link>
+              </span>
+            </li>
+          ),
+        )}
+      </ul>
+      <p>Here are the most named colors:</p>
+      <ul className="moodboardr__colorlist">
+        {mostNamedColors.map(({ color, _count: { glossaristId } }) => (
           <li key={color}>
             <Link to={color}>
               <span
@@ -90,9 +137,10 @@ export default function ColorsIndex() {
                 {'#'}
                 {color}
               </span>
-              <span className="moodboardr__colorlist-name">{name}</span>
+              <span className="moodboardr__colorlist-name">
+                {glossaristId} time{glossaristId === 1 ? '' : 's'}
+              </span>
             </Link>
-            by <Link to={`/users/${username}`}>{username}</Link>
           </li>
         ))}
       </ul>
