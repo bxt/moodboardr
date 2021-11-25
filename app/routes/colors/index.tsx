@@ -11,6 +11,9 @@ type ColorsIndexData = {
   namedColors: {
     color: string;
     name: string;
+    glossarist: {
+      username: string;
+    };
   }[];
   randomColors: string[];
 };
@@ -19,7 +22,11 @@ export const loader: LoaderFunction = async () => {
   const data: ColorsIndexData = {
     namedColors: await prisma.colorName.findMany({
       take: 10,
-      select: { color: true, name: true },
+      select: {
+        color: true,
+        name: true,
+        glossarist: { select: { username: true } },
+      },
       orderBy: { createdAt: 'desc' },
     }),
     randomColors: [...Array(30).keys()].map(() => randomColor()),
@@ -72,7 +79,7 @@ export default function ColorsIndex() {
       <h1>Colors</h1>
       <p>Here are some recently named colors:</p>
       <ul className="moodboardr__colorlist">
-        {namedColors.map(({ color, name }) => (
+        {namedColors.map(({ color, name, glossarist: { username } }) => (
           <li key={color}>
             <Link to={color}>
               <span
@@ -85,6 +92,7 @@ export default function ColorsIndex() {
               </span>
               <span className="moodboardr__colorlist-name">{name}</span>
             </Link>
+            by <Link to={`/users/${username}`}>{username}</Link>
           </li>
         ))}
       </ul>

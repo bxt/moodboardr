@@ -45,7 +45,8 @@ export default function ColorsIdIndex() {
           <ul>
             {colorNames.map(({ name, glossarist: { username } }) => (
               <li key={username}>
-                {name} by {username}
+                <i>{name}</i> by{' '}
+                <Link to={`/users/${username}`}>{username}</Link>
               </li>
             ))}
           </ul>
