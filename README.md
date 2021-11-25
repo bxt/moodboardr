@@ -73,4 +73,9 @@ rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
 ```
+
 </details>
+
+## Thank you
+
+Special thanks to [New Work SE](https://www.new-work.se/) for sponsoring the Hackweek which I used to work on this project. If you have any interest in improving your working life I'd suggest you check out their product [XING](https://www.xing.com/).
