@@ -1,6 +1,7 @@
 import { json, useLoaderData } from 'remix';
 import type { LoaderFunction } from 'remix';
 import { prisma } from '~/utils/db.server';
+import { requireColor } from '~/utils/colors';
 
 type ColorsIdIndexData = {
   color: string;
@@ -13,19 +14,7 @@ type ColorsIdIndexData = {
 };
 
 export const loader: LoaderFunction = async ({ params }) => {
-  // pretend like we're using params.id to look something up in the db
-
-  // now pretend like the record exists but the user just isn't authorized to
-  // see it.
-  if (params.id === 'forbidden') {
-    throw json({ webmasterEmail: 'hello@remix.run' }, { status: 401 });
-  }
-
-  if (!params.id?.match?.(/[0-9a-f]{6}/)) {
-    throw new Response('Not Found', { status: 404 });
-  }
-
-  const color = params.id;
+  const color = requireColor(params);
 
   const data: ColorsIdIndexData = {
     color,

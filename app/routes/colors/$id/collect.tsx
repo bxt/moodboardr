@@ -1,5 +1,6 @@
 import type { LoaderFunction, ActionFunction } from 'remix';
 import { useLoaderData, json, Form, redirect, useActionData } from 'remix';
+import { requireColor } from '~/utils/colors';
 import { prisma } from '~/utils/db.server';
 import { requireUserId } from '~/utils/session.server';
 
@@ -54,12 +55,7 @@ export const action: ActionFunction = async ({
   params,
 }): Promise<Response | ActionData> => {
   const userId = await requireUserId(request);
-
-  if (!params.id?.match?.(/[0-9a-f]{6}/)) {
-    throw new Response('Not Found', { status: 404 });
-  }
-
-  const color = params.id;
+  const color = requireColor(params);
 
   const form = await request.formData();
   const name = form.get('name');
