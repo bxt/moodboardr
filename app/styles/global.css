@@ -4,6 +4,7 @@
   --color-links: hsl(213, 81%, 43%);
   --color-links-hover: hsl(213, 68%, 49%);
   --color-border: hsl(0, 0%, 82%);
+  --color-problem: hsl(0, 86%, 37%);
   --font-body: -apple-system, 'Segoe UI', Helvetica Neue, Helvetica, Roboto,
     Arial, sans-serif, system-ui, 'Apple Color Emoji', 'Segoe UI Emoji';
   --gap-s: .5em;
@@ -105,4 +106,8 @@ input, button {
 input[type=color] {
   height: 3rem;
   vertical-align: middle;
+}
+
+.form-validation-error {
+  color: var(--color-problem);
 }
