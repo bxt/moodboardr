@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  NavLink,
   Link,
   Links,
   LiveReload,
@@ -13,7 +14,6 @@ import {
   json,
 } from 'remix';
 import type { MetaFunction, LinksFunction, LoaderFunction } from 'remix';
-import { db } from '~/utils/db.server';
 import { getUser } from '~/utils/session.server';
 
 import globalStylesUrl from '~/styles/global.css';
@@ -133,29 +133,53 @@ function Layout({
           <nav aria-label="Main navigation" className="moodboardr__header-nav">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <NavLink
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  to="/"
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
                 <Link to="/">Boards</Link>
               </li>
               <li>
-                <Link to="/colors">Colors</Link>
+                <NavLink
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  to="/colors"
+                >
+                  Colors
+                </NavLink>
               </li>
               <li>
                 <Link to="/">Patterns</Link>
               </li>
               {user === undefined ? null : user ? (
-                <li>
-                  <Link to={`/users/${user.username}`}>{user.username}</Link>
-                  <form action="/logout" method="post">
-                    <button type="submit" className="button">
-                      Logout
-                    </button>
-                  </form>
-                </li>
+                <>
+                  <li>
+                    <NavLink
+                      to={`/users/${user.username}`}
+                      className={({ isActive }) => (isActive ? 'active' : '')}
+                    >
+                      {user.username}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <form action="/logout" method="post">
+                      <button type="submit" className="button">
+                        Logout
+                      </button>
+                    </form>
+                  </li>
+                </>
               ) : (
                 <li>
-                  <Link to="/login">login</Link>
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) => (isActive ? 'active' : '')}
+                  >
+                    login
+                  </NavLink>
                 </li>
               )}
             </ul>
