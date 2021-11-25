@@ -1,8 +1,11 @@
-import { Link, json, useLoaderData, redirect, useActionData } from 'remix';
+import { json, useLoaderData, redirect, useActionData } from 'remix';
 import type { LoaderFunction, MetaFunction, ActionFunction } from 'remix';
 import { prisma } from '~/utils/db.server';
 import { requireUserId } from '~/utils/session.server';
-import BoardEditor, { parseFormData } from '~/components/BoardEditor';
+import BoardEditor, {
+  BoardEditorActionData,
+  parseFormData,
+} from '~/components/BoardEditor';
 
 type BoardsAddData = {
   recentlyNamedColors: {
@@ -32,25 +35,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json(data);
 };
 
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    name: string | undefined;
-    intro: string | undefined;
-    colors: {
-      color: string | undefined;
-      relativeSize: string | undefined;
-    }[];
-  };
-  fields?: {
-    intro: string;
-    name: string;
-    colors: {
-      color: string;
-      relativeSize: string;
-    }[];
-  };
-};
+type ActionData = BoardEditorActionData;
 
 export const action: ActionFunction = async ({
   request,
