@@ -138,18 +138,22 @@ export default function Login() {
           </label>
         </fieldset>
         <div>
-          <label>
-            Username
-            <input
-              type="text"
-              name="username"
-              defaultValue={actionData?.fields?.username}
-              aria-invalid={Boolean(actionData?.fieldErrors?.username)}
-              aria-describedby={
-                actionData?.fieldErrors?.username ? 'username-error' : undefined
-              }
-            />
-          </label>
+          <p>
+            <label>
+              Username:
+              <input
+                type="text"
+                name="username"
+                defaultValue={actionData?.fields?.username}
+                aria-invalid={Boolean(actionData?.fieldErrors?.username)}
+                aria-describedby={
+                  actionData?.fieldErrors?.username
+                    ? 'username-error'
+                    : undefined
+                }
+              />
+            </label>
+          </p>
           {actionData?.fieldErrors?.username ? (
             <p
               className="form-validation-error"
@@ -161,20 +165,24 @@ export default function Login() {
           ) : null}
         </div>
         <div>
-          <label>
-            Password
-            <input
-              name="password"
-              type="password"
-              defaultValue={actionData?.fields?.password}
-              aria-invalid={
-                Boolean(actionData?.fieldErrors?.password) || undefined
-              }
-              aria-describedby={
-                actionData?.fieldErrors?.password ? 'password-error' : undefined
-              }
-            />
-          </label>
+          <p>
+            <label>
+              Password:
+              <input
+                name="password"
+                type="password"
+                defaultValue={actionData?.fields?.password}
+                aria-invalid={
+                  Boolean(actionData?.fieldErrors?.password) || undefined
+                }
+                aria-describedby={
+                  actionData?.fieldErrors?.password
+                    ? 'password-error'
+                    : undefined
+                }
+              />
+            </label>
+          </p>
 
           {actionData?.fieldErrors?.password ? (
             <p
