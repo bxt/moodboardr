@@ -32,6 +32,9 @@ export default function ColorsId() {
           <Link to=".">Names</Link>
         </li>
         <li>
+          <Link to="related">Related</Link>
+        </li>
+        <li>
           <Link to="collect">Collect</Link>
         </li>
       </ul>
