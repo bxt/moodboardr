@@ -1,1 +1,20 @@
-/** styles only used in beards section */
+/** styles only used in boards section */
+
+.moodboardr__board-preview {
+    height: 20vh;
+    margin: 1em calc(var(--gap-m) / -2 - 1.5px) 3em ;
+    border: 3px solid var(--color-border);
+    border-radius: 1ch;
+    display: flex;
+}
+
+.moodboardr__board-element:first-child {
+  border-top-left-radius: calc(1ch - 3px);
+  border-bottom-left-radius: calc(1ch - 3px);
+}
+
+.moodboardr__board-element:last-child {
+  border-top-right-radius: calc(1ch - 3px);
+  border-bottom-right-radius: calc(1ch - 3px);
+}
+
