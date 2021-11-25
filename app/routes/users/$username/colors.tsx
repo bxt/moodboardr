@@ -1,6 +1,6 @@
 import type { LoaderFunction, MetaFunction } from 'remix';
 import { useLoaderData, json, Link } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 
 type UsersIdColorsData = {
   user: {
@@ -22,7 +22,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     throw new Response('No username', { status: 400 });
   }
 
-  const user = await db.user.findFirst({
+  const user = await prisma.user.findFirst({
     select: {
       username: true,
       _count: { select: { colorNames: true } },

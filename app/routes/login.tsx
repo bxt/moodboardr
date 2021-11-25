@@ -1,6 +1,6 @@
 import type { ActionFunction } from 'remix';
 import { useSearchParams, useActionData } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 import {
   register,
   login,
@@ -70,7 +70,7 @@ export const action: ActionFunction = async ({
       return createUserSessionAndRedirect(user.id, redirectTo);
     }
     case 'register': {
-      const userExists = await db.user.findFirst({
+      const userExists = await prisma.user.findFirst({
         where: { username },
       });
       if (userExists) {

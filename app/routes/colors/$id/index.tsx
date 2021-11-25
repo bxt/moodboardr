@@ -1,6 +1,6 @@
 import { json, useLoaderData } from 'remix';
 import type { LoaderFunction } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 
 type ColorsIdIndexData = {
   color: string;
@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const data: ColorsIdIndexData = {
     color,
-    colorNames: await db.colorName.findMany({
+    colorNames: await prisma.colorName.findMany({
       take: 10,
       select: { name: true, glossarist: { select: { username: true } } },
       where: { color },

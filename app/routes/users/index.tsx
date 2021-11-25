@@ -1,6 +1,6 @@
 import type { LoaderFunction } from 'remix';
 import { useLoaderData, json, Link } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 
 type UsersIndexData = {
   users: {
@@ -10,7 +10,7 @@ type UsersIndexData = {
 
 export const loader: LoaderFunction = async () => {
   const data: UsersIndexData = {
-    users: await db.user.findMany({
+    users: await prisma.user.findMany({
       take: 10,
       select: { username: true },
       orderBy: { createdAt: 'desc' },

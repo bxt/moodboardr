@@ -1,6 +1,6 @@
 import type { LoaderFunction, ActionFunction } from 'remix';
 import { useLoaderData, json, Form, redirect, useActionData } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 import { requireUserId } from '~/utils/session.server';
 
 type ColorsIdCollectData = {
@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const data: ColorsIdCollectData = {
     color,
-    existingColorName: await db.colorName.findUnique({
+    existingColorName: await prisma.colorName.findUnique({
       select: { name: true },
       where: { color_glossaristId },
     }),
@@ -76,7 +76,7 @@ export const action: ActionFunction = async ({
 
   const color_glossaristId = { color, glossaristId: userId };
 
-  const colorName = await db.colorName.upsert({
+  const colorName = await prisma.colorName.upsert({
     where: {
       color_glossaristId,
     },

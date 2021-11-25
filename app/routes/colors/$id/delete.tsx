@@ -1,6 +1,6 @@
 import type { LoaderFunction, ActionFunction } from 'remix';
 import { useLoaderData, Form, redirect, useActionData } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 import { requireUserId } from '~/utils/session.server';
 
 type ColorsIdCollectData = {
@@ -38,7 +38,7 @@ export const action: ActionFunction = async ({
 
   const color_glossaristId = { color, glossaristId: userId };
 
-  await db.colorName.delete({
+  await prisma.colorName.delete({
     where: {
       color_glossaristId,
     },

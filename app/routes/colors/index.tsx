@@ -1,6 +1,6 @@
 import type { LoaderFunction, ActionFunction } from 'remix';
 import { useLoaderData, json, Link, Form, redirect } from 'remix';
-import { db } from '~/utils/db.server';
+import { prisma } from '~/utils/db.server';
 
 const randomColor = () =>
   [...Array(6).keys()]
@@ -17,7 +17,7 @@ type ColorsIndexData = {
 
 export const loader: LoaderFunction = async () => {
   const data: ColorsIndexData = {
-    namedColors: await db.colorName.findMany({
+    namedColors: await prisma.colorName.findMany({
       take: 10,
       select: { color: true, name: true },
       orderBy: { createdAt: 'desc' },
