@@ -136,7 +136,7 @@ function Layout({
                 <NavLinkWithActive to="/">Home</NavLinkWithActive>
               </li>
               <li>
-                <Link to="/">Boards</Link>
+                <Link to="/boards">Boards</Link>
               </li>
               <li>
                 <NavLinkWithActive to="/colors">Colors</NavLinkWithActive>
