@@ -83,7 +83,6 @@ export const action: ActionFunction = async ({ request }) => {
 export default function ColorsIndex() {
   const { randomColors, recentlyNamedColors, mostNamedColors } =
     useLoaderData<ColorsIndexData>();
-  console.log({ mostNamedColors });
 
   return (
     <div>
