@@ -47,7 +47,7 @@ export default function ColorsIdRelated() {
           <ul className="moodboardr__colorlist">
             {colors.map((hexColor) => (
               <li key={hexColor}>
-                <Link to={`/colors/${hexColor.substr(1)}`}>
+                <Link to={`/colors/${hexColor.substr(1)}/related`}>
                   <span
                     className="moodboardr__colorlist-preview"
                     style={{ backgroundColor: hexColor }}
