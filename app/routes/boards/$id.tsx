@@ -25,7 +25,6 @@ export const loader: LoaderFunction = async ({ params }) => {
     where: { id: params.id },
     select: {
       name: true,
-      intro: true,
       createdAt: true,
       artDirector: {
         select: { username: true },
