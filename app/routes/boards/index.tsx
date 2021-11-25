@@ -37,6 +37,9 @@ export default function BoardsIndex() {
   return (
     <div>
       <h1>Boards</h1>
+      <p>
+        Would you like to <Link to="add">add a board</Link>?
+      </p>
       <p>Here are some recently created boards:</p>
       <ul>
         {recentlyCreatedBoards.map(
