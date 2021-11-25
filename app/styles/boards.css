@@ -2,7 +2,7 @@
 
 .moodboardr__board-preview {
     height: 20vh;
-    margin: 1em calc(var(--gap-m) / -2 - 1.5px) 3em ;
+    margin: 1em calc(var(--gap-m) / -2 - 1.5px) 3em;
     border: 3px solid var(--color-border);
     border-radius: 1ch;
     display: flex;
