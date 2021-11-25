@@ -83,6 +83,7 @@ hr {
 }
 
 fieldset {
+  margin: 1em 0;
   border: 3px solid var(--color-border);
   border-radius: 1ch;
 }
