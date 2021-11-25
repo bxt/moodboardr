@@ -141,9 +141,6 @@ function Layout({
               <li>
                 <NavLinkWithActive to="/colors">Colors</NavLinkWithActive>
               </li>
-              <li>
-                <Link to="/">Patterns</Link>
-              </li>
               {user === undefined ? null : user ? (
                 <>
                   <li>
