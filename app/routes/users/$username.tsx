@@ -1,12 +1,14 @@
 import { Link, Outlet, json, useLoaderData } from 'remix';
 import type { LoaderFunction, MetaFunction } from 'remix';
 import { prisma } from '~/utils/db.server';
+import { NavLinkWithActive } from '~/components/NavLinkWithActive';
 
 type UsersIdData = {
   user: {
     username: string;
     _count: {
       colorNames: number;
+      boards: number;
     };
   };
 };
@@ -19,7 +21,10 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 
   const user = await prisma.user.findFirst({
-    select: { username: true, _count: { select: { colorNames: true } } },
+    select: {
+      username: true,
+      _count: { select: { colorNames: true, boards: true } },
+    },
     where: { username },
   });
 
@@ -44,11 +49,21 @@ export default function UsersId() {
       </p>
       <h1>The space of {user.username}</h1>
       <p>They collected a bunch of inspiration:</p>
-      <ul>
-        <li>
-          <Link to="colors">{user._count.colorNames} colors</Link>
-        </li>
-      </ul>
+
+      <nav aria-label="User navigation" className="moodboardr__nav">
+        <ul>
+          <li>
+            <NavLinkWithActive to="boards">
+              {user._count.boards} boards
+            </NavLinkWithActive>
+          </li>
+          <li>
+            <NavLinkWithActive to="colors">
+              {user._count.colorNames} colors
+            </NavLinkWithActive>
+          </li>
+        </ul>
+      </nav>
       <Outlet />
     </>
   );
