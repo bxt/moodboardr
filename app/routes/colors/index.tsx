@@ -26,7 +26,7 @@ type ColorsIndexData = {
 
 export const loader: LoaderFunction = async () => {
   const recentlyNamedColors = await prisma.colorName.findMany({
-    take: 10,
+    take: 14,
     select: {
       color: true,
       name: true,
