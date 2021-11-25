@@ -336,72 +336,74 @@ export default function BoardsIdEdit() {
           </p>
         ) : null}
 
-        {[...Array(colorCount).keys()].map((index) => (
-          <fieldset key={index}>
-            <legend>Color {index}</legend>
-            <p>
-              <label>
-                Color:
-                <input
-                  type="color"
-                  name={`color[${index}].color`}
-                  defaultValue={
-                    actionData?.fields?.colors?.[index]?.color ??
-                    `#${loaderData?.board?.colors?.[index]?.color}`
-                  }
-                  aria-invalid={Boolean(
-                    actionData?.fieldErrors?.colors?.[index]?.color,
-                  )}
-                  aria-describedby={
-                    actionData?.fieldErrors?.colors?.[index]?.color
-                      ? `color[${index}].color-error`
-                      : undefined
-                  }
-                />
-              </label>
-            </p>
-            {actionData?.fieldErrors?.colors?.[index]?.color ? (
-              <p
-                className="form-validation-error"
-                role="alert"
-                id={`color[${index}].color-error`}
-              >
-                {actionData?.fieldErrors?.colors?.[index]?.color}
+        <div className="moodboardr__board-colorfieldsets">
+          {[...Array(colorCount).keys()].map((index) => (
+            <fieldset key={index}>
+              <legend>Color {index}</legend>
+              <p>
+                <label>
+                  Color:
+                  <input
+                    type="color"
+                    name={`color[${index}].color`}
+                    defaultValue={
+                      actionData?.fields?.colors?.[index]?.color ??
+                      `#${loaderData?.board?.colors?.[index]?.color}`
+                    }
+                    aria-invalid={Boolean(
+                      actionData?.fieldErrors?.colors?.[index]?.color,
+                    )}
+                    aria-describedby={
+                      actionData?.fieldErrors?.colors?.[index]?.color
+                        ? `color[${index}].color-error`
+                        : undefined
+                    }
+                  />
+                </label>
               </p>
-            ) : null}
+              {actionData?.fieldErrors?.colors?.[index]?.color ? (
+                <p
+                  className="form-validation-error"
+                  role="alert"
+                  id={`color[${index}].color-error`}
+                >
+                  {actionData?.fieldErrors?.colors?.[index]?.color}
+                </p>
+              ) : null}
 
-            <p>
-              <label>
-                Size:
-                <input
-                  type="number"
-                  name={`color[${index}].relativeSize`}
-                  defaultValue={
-                    actionData?.fields?.colors?.[index]?.relativeSize ??
-                    (loaderData?.board?.colors?.[index]?.relativeSize || '1')
-                  }
-                  aria-invalid={Boolean(
-                    actionData?.fieldErrors?.colors?.[index]?.relativeSize,
-                  )}
-                  aria-describedby={
-                    actionData?.fieldErrors?.colors?.[index]?.relativeSize
-                      ? `color[${index}].relativeSize-error`
-                      : undefined
-                  }
-                />
-              </label>
-            </p>
-            {actionData?.fieldErrors?.colors?.[index]?.relativeSize ? (
-              <p
-                className="form-validation-error"
-                role="alert"
-                id={`color[${index}].relativeSize-error`}
-              >
-                {actionData?.fieldErrors?.colors?.[index]?.relativeSize}
+              <p>
+                <label>
+                  Size:
+                  <input
+                    type="number"
+                    name={`color[${index}].relativeSize`}
+                    defaultValue={
+                      actionData?.fields?.colors?.[index]?.relativeSize ??
+                      (loaderData?.board?.colors?.[index]?.relativeSize || '1')
+                    }
+                    aria-invalid={Boolean(
+                      actionData?.fieldErrors?.colors?.[index]?.relativeSize,
+                    )}
+                    aria-describedby={
+                      actionData?.fieldErrors?.colors?.[index]?.relativeSize
+                        ? `color[${index}].relativeSize-error`
+                        : undefined
+                    }
+                  />
+                </label>
               </p>
-            ) : null}
-          </fieldset>
-        ))}
+              {actionData?.fieldErrors?.colors?.[index]?.relativeSize ? (
+                <p
+                  className="form-validation-error"
+                  role="alert"
+                  id={`color[${index}].relativeSize-error`}
+                >
+                  {actionData?.fieldErrors?.colors?.[index]?.relativeSize}
+                </p>
+              ) : null}
+            </fieldset>
+          ))}
+        </div>
 
         <input type="hidden" name="colorCount" value={colorCount} />
 

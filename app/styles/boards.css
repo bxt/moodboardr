@@ -18,3 +18,17 @@
   border-bottom-right-radius: calc(1ch - 3px);
 }
 
+.moodboardr__board-colorfieldsets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-m);
+}
+
+.moodboardr__board-colorfieldsets fieldset {
+  flex: 0 0 auto;
+}
+
+.moodboardr__board-colorfieldsets fieldset input[type=number] {
+  width: 14ch;
+}
+
