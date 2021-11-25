@@ -50,7 +50,7 @@ export default function ColorsId() {
       <p>
         <strong>Change to another color:</strong>
       </p>
-      <Form method="post" action="..">
+      <Form method="post" action="..?index">
         <input type="color" name="hexColor" defaultValue={`#${color}`} />
         <input type="submit" />
       </Form>
