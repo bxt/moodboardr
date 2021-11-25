@@ -56,6 +56,7 @@ export default function ColorsIndex() {
 
   return (
     <div>
+      <h1>Colors</h1>
       <p>Here are some recently named colors:</p>
       <ul>
         {namedColors.map(({ color, name }) => (

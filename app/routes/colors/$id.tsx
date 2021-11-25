@@ -1,15 +1,8 @@
-import { Link, Form, json, useLoaderData } from 'remix';
+import { Link, Form, json, useLoaderData, Outlet } from 'remix';
 import type { LoaderFunction, MetaFunction } from 'remix';
-import { db } from '~/utils/db.server';
 
 type ColorsIdData = {
   color: string;
-  colorNames: {
-    name: string;
-    glossarist: {
-      username: string;
-    };
-  }[];
 };
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -29,12 +22,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const data: ColorsIdData = {
     color,
-    colorNames: await db.colorName.findMany({
-      take: 10,
-      select: { name: true, glossarist: { select: { username: true } } },
-      where: { color },
-      orderBy: { createdAt: 'desc' },
-    }),
   };
 
   // https://remix.run/api/remix#json
@@ -42,7 +29,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export default function ColorsId() {
-  const { color, colorNames } = useLoaderData<ColorsIdData>();
+  const { color } = useLoaderData<ColorsIdData>();
   return (
     <>
       <p>
@@ -51,14 +38,18 @@ export default function ColorsId() {
       <h1>
         The color is <i style={{ color: `#${color}` }}>#{color}</i>
       </h1>
-      <p>It&apos;s known by many names:</p>
       <ul>
-        {colorNames.map(({ name, glossarist: { username } }) => (
-          <li key={username}>
-            {name} by {username}
-          </li>
-        ))}
+        <li>
+          <Link to=".">Names</Link>
+        </li>
+        <li>
+          <Link to="collect">Collect</Link>
+        </li>
       </ul>
+      <Outlet />
+      <p>
+        <strong>Change to another color:</strong>
+      </p>
       <Form method="post" action="..">
         <input type="color" name="hexColor" defaultValue={`#${color}`} />
         <input type="submit" />

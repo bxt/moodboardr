@@ -146,7 +146,7 @@ function Layout({
               </li>
               {user === undefined ? null : user ? (
                 <li>
-                  <Link to={`/user/${user.username}`}>{user.username}</Link>
+                  <Link to={`/users/${user.username}`}>{user.username}</Link>
                   <form action="/logout" method="post">
                     <button type="submit" className="button">
                       Logout
