@@ -13,12 +13,7 @@ type ColorsIdCollectData = {
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);
-
-  if (!params.id?.match?.(/[0-9a-f]{6}/)) {
-    throw new Response('Not Found', { status: 404 });
-  }
-
-  const color = params.id;
+  const color = requireColor(params);
 
   const color_glossaristId = { color, glossaristId: userId };
 
