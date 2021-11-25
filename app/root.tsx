@@ -172,7 +172,8 @@ function Layout({
         <div className="container moodboardr__footer-content">
           <p>
             &copy; 2021 by{' '}
-            <a href="https://github.com/bxt">Bernhard Häussner</a>
+            <a href="https://github.com/bxt">Bernhard Häussner</a> –{' '}
+            <Link to="/about">About this app</Link>
           </p>
         </div>
       </footer>
