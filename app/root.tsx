@@ -218,6 +218,7 @@ export function CatchBoundary() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
+  // eslint-disable-next-line no-console
   console.error(error);
   return (
     <Document title="Error!">
