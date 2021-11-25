@@ -9,7 +9,7 @@ import {
 import type { LoaderFunction, MetaFunction, ActionFunction } from 'remix';
 import { prisma } from '~/utils/db.server';
 import { requireUserId } from '~/utils/session.server';
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 
 type BoardsIdEditData = {
   board: {
@@ -125,27 +125,7 @@ type ActionData = {
   };
 };
 
-export const action: ActionFunction = async ({
-  request,
-  params,
-}): Promise<Response | ActionData> => {
-  const userId = await requireUserId(request);
-  if (!params.id) throw new Response('Not Found', { status: 404 });
-
-  const board = await prisma.board.findUnique({
-    where: { id: params.id },
-    select: {
-      artDirector: {
-        select: { username: true, id: true },
-      },
-    },
-  });
-
-  if (!board) throw new Response('Not Found', { status: 404 });
-  if (board.artDirector.id !== userId)
-    throw new Response('Not your board', { status: 403 });
-
-  const form = await request.formData();
+function parseFormData(form: FormData): ActionData {
   const intro = form.get('intro');
   const name = form.get('name');
   const colorCountString = form.get('colorCount');
@@ -192,6 +172,37 @@ export const action: ActionFunction = async ({
       fields,
     };
 
+  return { fields };
+}
+
+export const action: ActionFunction = async ({
+  request,
+  params,
+}): Promise<Response | ActionData> => {
+  const userId = await requireUserId(request);
+  if (!params.id) throw new Response('Not Found', { status: 404 });
+
+  const board = await prisma.board.findUnique({
+    where: { id: params.id },
+    select: {
+      artDirector: {
+        select: { username: true, id: true },
+      },
+    },
+  });
+
+  if (!board) throw new Response('Not Found', { status: 404 });
+  if (board.artDirector.id !== userId)
+    throw new Response('Not your board', { status: 403 });
+
+  const form = await request.formData();
+  const parsedForm = parseFormData(form);
+
+  if (parsedForm.fieldErrors || parsedForm.formError || !parsedForm.fields)
+    return parsedForm;
+
+  const { name, intro, colors } = parsedForm.fields;
+
   await prisma.board.update({
     where: {
       id: params.id,
@@ -233,17 +244,43 @@ export default function BoardsIdEdit() {
     actionData?.fields?.colors?.length ?? colors.length,
   );
 
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [parsedForm, setParsedForm] = useState<ActionData>({
+    formError: 'Please fill in form',
+  });
+  const parsedFormFields =
+    parsedForm.fieldErrors || parsedForm.formError
+      ? undefined
+      : parsedForm.fields;
+
+  const refreshParsedForm = useCallback(() => {
+    if (formRef.current) {
+      setParsedForm(parseFormData(new FormData(formRef.current)));
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshParsedForm();
+  }, [colorCount, refreshParsedForm]);
+
   return (
     <>
       <h1>
-        <Link to="..">Boards</Link> &raquo; {name}
+        <Link to="..">Boards</Link> &raquo; {parsedFormFields?.name ?? name}
       </h1>
       <p>
         Created by <Link to={`/users/${username}`}>{username}</Link> at{' '}
         {createdAt.substr(0, 10)}
       </p>
       <div className="moodboardr__board-preview">
-        {colors.map(({ color, relativeSize }, index) => (
+        {(parsedFormFields?.colors
+          ? parsedFormFields.colors.map(({ color, relativeSize }) => ({
+              color: color.substr(1),
+              relativeSize,
+            }))
+          : colors
+        ).map(({ color, relativeSize }, index) => (
           <div
             key={index}
             className="moodboardr__board-element"
@@ -252,6 +289,8 @@ export default function BoardsIdEdit() {
         ))}
       </div>
       <Form
+        ref={formRef}
+        onChange={refreshParsedForm}
         method="post"
         aria-describedby={
           actionData?.formError ? 'form-error-message' : undefined
@@ -339,7 +378,7 @@ export default function BoardsIdEdit() {
                   name={`color[${index}].relativeSize`}
                   defaultValue={
                     actionData?.fields?.colors?.[index]?.relativeSize ??
-                    loaderData?.board?.colors?.[index]?.relativeSize
+                    (loaderData?.board?.colors?.[index]?.relativeSize || '1')
                   }
                   aria-invalid={Boolean(
                     actionData?.fieldErrors?.colors?.[index]?.relativeSize,
@@ -369,8 +408,7 @@ export default function BoardsIdEdit() {
         <p>
           <button
             type="button"
-            onClick={(event) => {
-              event.preventDefault();
+            onClick={() => {
               setColorCount((colorCount) => colorCount + 1);
             }}
           >
@@ -378,8 +416,7 @@ export default function BoardsIdEdit() {
           </button>
           <button
             type="button"
-            onClick={(event) => {
-              event.preventDefault();
+            onClick={() => {
               setColorCount((colorCount) => colorCount - 1);
             }}
           >
