@@ -6,7 +6,6 @@ import { prisma } from '~/utils/db.server';
 type BoardsIdData = {
   board: {
     name: string;
-    intro: string;
     createdAt: string;
     artDirector: {
       username: string;
