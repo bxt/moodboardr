@@ -6,6 +6,7 @@
   --color-border: hsl(0, 0%, 82%);
   --font-body: -apple-system, 'Segoe UI', Helvetica Neue, Helvetica, Roboto,
     Arial, sans-serif, system-ui, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --gap-m: 1.5em;
 }
 
 html {
@@ -91,4 +92,16 @@ input:where([type='search']) {
   max-width: calc(100% - var(--gutter) * 2);
   margin-right: auto;
   margin-left: auto;
+}
+
+input, button {
+  padding: calc(var(--gap-m) / 3) calc(var(--gap-m) / 2);
+  margin: 0 calc(var(--gap-m) / 3);
+  border: 3px solid var(--color-border);
+  border-radius: 1ch;
+}
+
+input[type=color] {
+  height: 3rem;
+  vertical-align: middle;
 }

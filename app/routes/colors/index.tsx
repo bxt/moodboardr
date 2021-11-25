@@ -56,6 +56,19 @@ export default function ColorsIndex() {
 
   return (
     <div>
+      <Form method="post">
+        <p>
+          <label>
+            Navigate to a color:
+            <input
+              type="color"
+              name="hexColor"
+              defaultValue={`#${randomColor()}`}
+            />
+          </label>
+          <input type="submit" value="Go" />
+        </p>
+      </Form>
       <h1>Colors</h1>
       <p>Here are some recently named colors:</p>
       <ul>
@@ -79,17 +92,6 @@ export default function ColorsIndex() {
           </li>
         ))}
       </ul>
-      <p>
-        <strong>Check out one of them.</strong>
-      </p>
-      <Form method="post">
-        <input
-          type="color"
-          name="hexColor"
-          defaultValue={`#${randomColor()}`}
-        />
-        <input type="submit" />
-      </Form>
     </div>
   );
 }

@@ -29,22 +29,23 @@
   font-size: 2rem;
 }
 
-.moodboardr__header-nav ul {
+.moodboardr__nav ul {
   list-style: none;
   margin: 0;
+  padding: 0;
   display: flex;
   align-items: center;
-  --nav-gap: 1.5em;
+  --nav-gap: var(--gap-m);
   gap: var(--nav-gap);
 }
 
-.moodboardr__header-nav li {
+.moodboardr__nav li {
   font-weight: bold;
 }
 
-.moodboardr__header-nav a.active {
-  padding: calc(var(--nav-gap) / 3) calc(var(--nav-gap) / 2);
-  margin: calc(var(--nav-gap) / -3 - 3px) calc(var(--nav-gap) / -2 - 3px);
+.moodboardr__nav a.active {
+  padding: calc(var(--nav-gap) / 3) calc(var(--nav-gap) / 2 - 1.5px);
+  margin: calc(var(--nav-gap) / -3 - 3px) calc(var(--nav-gap) / -2 - 1.5px);
   border: 3px solid var(--color-border);
   border-radius: 1ch;
 }

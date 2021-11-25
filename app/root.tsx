@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  NavLink,
   Link,
   Links,
   LiveReload,
@@ -19,6 +18,7 @@ import { getUser } from '~/utils/session.server';
 import globalStylesUrl from '~/styles/global.css';
 import darkStylesUrl from '~/styles/dark.css';
 import moodboardrStylesUrl from '~/styles/moodboardr.css';
+import { NavLinkWithActive } from '~/components/NavLinkWithActive';
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -130,26 +130,16 @@ function Layout({
           >
             <MoodboardrLogo />
           </Link>
-          <nav aria-label="Main navigation" className="moodboardr__header-nav">
+          <nav aria-label="Main navigation" className="moodboardr__nav">
             <ul>
               <li>
-                <NavLink
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                  to="/"
-                >
-                  Home
-                </NavLink>
+                <NavLinkWithActive to="/">Home</NavLinkWithActive>
               </li>
               <li>
                 <Link to="/">Boards</Link>
               </li>
               <li>
-                <NavLink
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                  to="/colors"
-                >
-                  Colors
-                </NavLink>
+                <NavLinkWithActive to="/colors">Colors</NavLinkWithActive>
               </li>
               <li>
                 <Link to="/">Patterns</Link>
@@ -157,12 +147,9 @@ function Layout({
               {user === undefined ? null : user ? (
                 <>
                   <li>
-                    <NavLink
-                      to={`/users/${user.username}`}
-                      className={({ isActive }) => (isActive ? 'active' : '')}
-                    >
+                    <NavLinkWithActive to={`/users/${user.username}`}>
                       {user.username}
-                    </NavLink>
+                    </NavLinkWithActive>
                   </li>
                   <li>
                     <form action="/logout" method="post">
@@ -174,12 +161,7 @@ function Layout({
                 </>
               ) : (
                 <li>
-                  <NavLink
-                    to="/login"
-                    className={({ isActive }) => (isActive ? 'active' : '')}
-                  >
-                    login
-                  </NavLink>
+                  <NavLinkWithActive to="/login">Login</NavLinkWithActive>
                 </li>
               )}
             </ul>

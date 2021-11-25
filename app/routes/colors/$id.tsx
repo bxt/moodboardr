@@ -1,6 +1,7 @@
 import { Link, Form, json, useLoaderData, Outlet } from 'remix';
 import type { LoaderFunction, MetaFunction } from 'remix';
 import { requireColor } from '~/utils/colors';
+import { NavLinkWithActive } from '~/components/NavLinkWithActive';
 
 type ColorsIdData = {
   color: string;
@@ -21,36 +22,43 @@ export default function ColorsId() {
   const { color } = useLoaderData<ColorsIdData>();
   return (
     <>
-      <p>
-        <Link to="..">back</Link>
-      </p>
-      <h1>
-        The color is <i style={{ color: `#${color}` }}>#{color}</i>
-      </h1>
-      <ul>
-        <li>
-          <Link to=".">Names</Link>
-        </li>
-        <li>
-          <Link to="related">Related</Link>
-        </li>
-        <li>
-          <Link to="collect">Collect</Link>
-        </li>
-      </ul>
-      <Outlet />
-      <p>
-        <strong>Change to another color:</strong>
-      </p>
       <Form method="post" action="..?index">
-        <input
-          type="color"
-          name="hexColor"
-          key={color}
-          defaultValue={`#${color}`}
-        />
-        <input type="submit" />
+        <p>
+          <label>
+            Navigate to a color:
+            <input
+              type="color"
+              name="hexColor"
+              key={color}
+              defaultValue={`#${color}`}
+            />
+          </label>
+          <input type="submit" value="Go" />
+        </p>
       </Form>
+      <h1>
+        <Link to="..">Colors</Link> &raquo; #{color}
+      </h1>
+      <div
+        className="moodboardr__color-preview"
+        style={{ backgroundColor: `#${color}` }}
+      />
+      <nav aria-label="Color navigation" className="moodboardr__nav">
+        <ul>
+          <li>
+            <NavLinkWithActive to="." end>
+              Names
+            </NavLinkWithActive>
+          </li>
+          <li>
+            <NavLinkWithActive to="related">Related</NavLinkWithActive>
+          </li>
+          <li>
+            <NavLinkWithActive to="collect">Collect</NavLinkWithActive>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
     </>
   );
 }
