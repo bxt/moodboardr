@@ -24,6 +24,11 @@ export const loader: LoaderFunction = async ({ params }) => {
         .scale(['white', `#${color}`, 'black'])
         .colors(9)
         .slice(1, -1),
+      'Saturation variants': [...Array(12).keys()].map((i) =>
+        chroma(`#${color}`)
+          .set('hsl.s', i / 12)
+          .hex(),
+      ),
     },
   };
 
