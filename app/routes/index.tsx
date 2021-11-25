@@ -1,5 +1,5 @@
 import type { LoaderFunction } from 'remix';
-import { useLoaderData, json } from 'remix';
+import { useLoaderData, json, Link } from 'remix';
 
 type IndexData = {
   greeting: string;
@@ -25,8 +25,12 @@ export default function Index() {
   return (
     <div className="remix__page">
       <main>
-        <h2>Welcome to moodboardr!</h2>
+        <h1>Welcome to moodboardr!</h1>
         <p>{greeting}</p>
+        <p>
+          Check out <Link to="boards">boards</Link>,{' '}
+          <Link to="colors">colors</Link> or <Link to="users">users</Link>.
+        </p>
       </main>
     </div>
   );
