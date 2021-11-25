@@ -53,11 +53,19 @@ export default function UsersIdColors() {
       <p>
         Most recent of the {_count.colorNames} colors of {username}:
       </p>
-      <ul>
+      <ul className="moodboardr__colorlist">
         {colorNames.map(({ name, color }) => (
           <li key={color}>
             <Link to={`/colors/${color}`}>
-              <i style={{ color: `#${color}` }}>#{color}</i> aka {name}
+              <span
+                className="moodboardr__colorlist-preview"
+                style={{ backgroundColor: `#${color}` }}
+              />
+              <span className="moodboardr__colorlist-hex">
+                {'#'}
+                {color}
+              </span>
+              <span className="moodboardr__colorlist-name">{name}</span>
             </Link>
           </li>
         ))}

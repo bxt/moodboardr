@@ -65,3 +65,38 @@
   justify-content: center;
   align-items: center;
 }
+
+.moodboardr__colorlist {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-s);
+
+}
+
+.moodboardr__colorlist::after {
+  content: '';
+  flex-grow: 1000000000;
+}
+
+.moodboardr__colorlist li {
+  flex: 1 0 0px;
+}
+
+.moodboardr__colorlist-preview {
+  display: block;
+  border: 3px solid var(--color-border);
+  border-radius: 1ch;
+  width: 50px;
+  height: 50px;
+}
+.moodboardr__colorlist-hex {
+  display: block;
+}
+.moodboardr__colorlist-name {
+  display: block;
+  color: var(--color-foreground);
+  width: 130px;
+}

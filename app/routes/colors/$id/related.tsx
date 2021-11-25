@@ -39,14 +39,15 @@ export default function ColorsIdRelated() {
       {Object.entries(relatedColors).map(([category, colors]) => (
         <Fragment key={category}>
           <h2>{category}</h2>
-          <ul>
+          <ul className="moodboardr__colorlist">
             {colors.map((hexColor) => (
               <li key={hexColor}>
-                <Link
-                  style={{ color: hexColor }}
-                  to={`/colors/${hexColor.substr(1)}`}
-                >
-                  {hexColor}
+                <Link to={`/colors/${hexColor.substr(1)}`}>
+                  <span
+                    className="moodboardr__colorlist-preview"
+                    style={{ backgroundColor: hexColor }}
+                  />
+                  <span className="moodboardr__colorlist-hex">{hexColor}</span>
                 </Link>
               </li>
             ))}

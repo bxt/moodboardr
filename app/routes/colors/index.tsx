@@ -22,7 +22,7 @@ export const loader: LoaderFunction = async () => {
       select: { color: true, name: true },
       orderBy: { createdAt: 'desc' },
     }),
-    randomColors: [...Array(10).keys()].map(() => randomColor()),
+    randomColors: [...Array(30).keys()].map(() => randomColor()),
   };
 
   // https://remix.run/api/remix#json
@@ -71,23 +71,36 @@ export default function ColorsIndex() {
       </Form>
       <h1>Colors</h1>
       <p>Here are some recently named colors:</p>
-      <ul>
+      <ul className="moodboardr__colorlist">
         {namedColors.map(({ color, name }) => (
           <li key={color}>
             <Link to={color}>
-              {'#'}
-              {color} aka {name}
+              <span
+                className="moodboardr__colorlist-preview"
+                style={{ backgroundColor: `#${color}` }}
+              />
+              <span className="moodboardr__colorlist-hex">
+                {'#'}
+                {color}
+              </span>
+              <span className="moodboardr__colorlist-name">{name}</span>
             </Link>
           </li>
         ))}
       </ul>
       <p>Here are some random colors:</p>
-      <ul>
+      <ul className="moodboardr__colorlist">
         {randomColors.map((color) => (
           <li key={color}>
             <Link to={color}>
-              {'#'}
-              {color}
+              <span
+                className="moodboardr__colorlist-preview"
+                style={{ backgroundColor: `#${color}` }}
+              />
+              <span className="moodboardr__colorlist-hex">
+                {'#'}
+                {color}
+              </span>
             </Link>
           </li>
         ))}

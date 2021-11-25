@@ -48,8 +48,8 @@ export default function UsersId() {
         <li>
           <Link to="colors">{user._count.colorNames} colors</Link>
         </li>
-        <Outlet />
       </ul>
+      <Outlet />
     </>
   );
 }

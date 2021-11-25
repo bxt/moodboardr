@@ -6,6 +6,7 @@
   --color-border: hsl(0, 0%, 82%);
   --font-body: -apple-system, 'Segoe UI', Helvetica Neue, Helvetica, Roboto,
     Arial, sans-serif, system-ui, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --gap-s: .5em;
   --gap-m: 1.5em;
 }
 
