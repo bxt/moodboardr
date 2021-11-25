@@ -17,6 +17,7 @@ model User {
   username     String   @unique
   passwordHash String
   colorNames   ColorName[]
+  boards       Board[]
 }
 
 model ColorName {
@@ -29,4 +30,26 @@ model ColorName {
   glossarist   User     @relation(fields: [glossaristId], references: [id], onDelete: Cascade)
 
   @@unique([color, glossaristId])
+}
+
+model Board {
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  name          String
+  intro         String
+  artDirectorId String
+  artDirector   User     @relation(fields: [artDirectorId], references: [id], onDelete: Cascade)
+  colors        ColorsOnBoards[]
+}
+
+model ColorsOnBoards {
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  boardId       String
+  board         Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  color         String
+  relativeSize  Int
+
+  @@id([color, boardId])
 }

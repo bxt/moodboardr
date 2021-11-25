@@ -164,6 +164,30 @@ async function seed() {
   for (const colorName of getColorNames({ bxt, x11Bot })) {
     await db.colorName.create({ data: colorName });
   }
+
+  await db.board.create({
+    data: {
+      name: 'XING Colors',
+      intro: 'These are some colors I found on an awesome website called XING.',
+      artDirectorId: bxt.id,
+      colors: {
+        create: [
+          {
+            color: 'c6f16d',
+            relativeSize: 10,
+          },
+          {
+            color: '0698a0',
+            relativeSize: 5,
+          },
+          {
+            color: '9c195b',
+            relativeSize: 1,
+          },
+        ],
+      },
+    },
+  });
 }
 
 seed();
