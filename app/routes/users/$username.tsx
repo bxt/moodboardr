@@ -71,6 +71,8 @@ export default function UsersId() {
 
 export const meta: MetaFunction = ({ data }: { data: UsersIdData }) => {
   return {
-    title: data ? `${data.user.username} on moodboardr` : 'Oops...',
+    title: data?.user?.username
+      ? `${data.user.username} on moodboardr`
+      : 'Oops...',
   };
 };
