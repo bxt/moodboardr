@@ -67,7 +67,7 @@ export default function BoardsId() {
                 <span className="moodboardr__colorlist-name">{name}</span>
               ) : null}
             </Link>
-            Size {relativeSize}
+            Size: {relativeSize}
           </li>
         ))}
       </ul>
