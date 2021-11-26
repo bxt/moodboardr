@@ -8,6 +8,10 @@ type UsersIdBoardsData = {
     boards: {
       name: string;
       id: string;
+      colors: {
+        color: string;
+        relativeSize: number;
+      }[];
     }[];
     _count: {
       boards: number;
@@ -30,6 +34,7 @@ export const loader: LoaderFunction = async ({ params }) => {
         select: {
           name: true,
           id: true,
+          colors: { select: { color: true, relativeSize: true } },
         },
         orderBy: { createdAt: 'desc' },
       },
@@ -59,10 +64,24 @@ export default function UsersIdColors() {
       <p>
         Most recent of the {_count.boards} boards of {username}:
       </p>
-      <ul>
-        {boards.map(({ name, id }) => (
+      <ul className="moodboardr__boardlist">
+        {boards.map(({ id, name, colors }) => (
           <li key={id}>
-            <Link to={`/boards/${id}`}>{name}</Link>
+            <div className="moodboardr__board-preview">
+              {colors.map(({ color, relativeSize }, index) => (
+                <div
+                  key={index}
+                  className="moodboardr__board-element"
+                  style={{
+                    backgroundColor: `#${color}`,
+                    flexGrow: relativeSize,
+                  }}
+                />
+              ))}
+            </div>
+            <div>
+              <Link to={`/boards/${id}`}>{name}</Link>
+            </div>
           </li>
         ))}
       </ul>

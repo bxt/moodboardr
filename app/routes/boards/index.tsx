@@ -9,6 +9,10 @@ type BoardsIndexData = {
     artDirector: {
       username: string;
     };
+    colors: {
+      color: string;
+      relativeSize: number;
+    }[];
   }[];
 };
 
@@ -19,6 +23,7 @@ export const loader: LoaderFunction = async () => {
       id: true,
       name: true,
       artDirector: { select: { username: true } },
+      colors: { select: { color: true, relativeSize: true } },
     },
     orderBy: { createdAt: 'desc' },
   });
@@ -41,12 +46,27 @@ export default function BoardsIndex() {
         Would you like to <Link to="add">add a board</Link>?
       </p>
       <p>Here are some recently created boards:</p>
-      <ul>
+      <ul className="moodboardr__boardlist">
         {recentlyCreatedBoards.map(
-          ({ id, name, artDirector: { username } }) => (
+          ({ id, name, artDirector: { username }, colors }) => (
             <li key={id}>
-              <Link to={id}>{name}</Link> by{' '}
-              <Link to={`/users/${username}`}>{username}</Link>
+              <div className="moodboardr__board-preview">
+                {colors.map(({ color, relativeSize }, index) => (
+                  <div
+                    key={index}
+                    className="moodboardr__board-element"
+                    style={{
+                      backgroundColor: `#${color}`,
+                      flexGrow: relativeSize,
+                    }}
+                  />
+                ))}
+              </div>
+              <div>
+                <Link to={id}>{name}</Link>
+                <br />
+                by <Link to={`/users/${username}`}>{username}</Link>
+              </div>
             </li>
           ),
         )}

@@ -100,3 +100,34 @@
   color: var(--color-foreground);
   width: 130px;
 }
+
+
+.moodboardr__boardlist {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-m);
+}
+
+.moodboardr__boardlist li {
+  flex: 0 1 200px;
+}
+
+.moodboardr__board-preview {
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-radius: 1ch;
+  display: flex;
+}
+
+.moodboardr__board-element:first-child {
+  border-top-left-radius: calc(1ch - 3px);
+  border-bottom-left-radius: calc(1ch - 3px);
+}
+
+.moodboardr__board-element:last-child {
+  border-top-right-radius: calc(1ch - 3px);
+  border-bottom-right-radius: calc(1ch - 3px);
+}

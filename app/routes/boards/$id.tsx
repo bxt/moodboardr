@@ -65,7 +65,7 @@ export default function BoardsId() {
         Created by <Link to={`/users/${username}`}>{username}</Link> at{' '}
         {createdAt.substr(0, 10)}
       </p>
-      <div className="moodboardr__board-preview">
+      <div className="moodboardr__board-preview big">
         {colors.map(({ color, relativeSize }, index) => (
           <div
             key={index}

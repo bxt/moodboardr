@@ -172,7 +172,7 @@ export default function BoardEditor({
 
       <p>{tagLine}</p>
 
-      <div className="moodboardr__board-preview">
+      <div className="moodboardr__board-preview big">
         {(parsedFormFields?.colors
           ? parsedFormFields.colors.map(({ color, relativeSize }) => ({
               color: color.substr(1),
