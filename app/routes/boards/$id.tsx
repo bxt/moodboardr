@@ -82,9 +82,7 @@ export default function BoardsId() {
             </NavLinkWithActive>
           </li>
           <li>
-            <NavLinkWithActive to="colors" end>
-              Colors
-            </NavLinkWithActive>
+            <NavLinkWithActive to="colors">Colors</NavLinkWithActive>
           </li>
           <li>
             <NavLinkWithActive to="edit">Edit</NavLinkWithActive>
