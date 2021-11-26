@@ -351,6 +351,21 @@ function getColorNames({ bxt, x11Bot }: { bxt: User; x11Bot: User }) {
       glossarist: { connect: { id: bxt.id } },
     },
     {
+      color: '133742',
+      name: 'Hacker teal',
+      glossarist: { connect: { id: bxt.id } },
+    },
+    {
+      color: '421337',
+      name: 'Hacker purple',
+      glossarist: { connect: { id: bxt.id } },
+    },
+    {
+      color: 'ff9900',
+      name: 'Beatiful Orange',
+      glossarist: { connect: { id: bxt.id } },
+    },
+    {
       color: 'fd2f10',
       name: 'Firetruck',
       glossarist: { connect: { id: bxt.id } },
