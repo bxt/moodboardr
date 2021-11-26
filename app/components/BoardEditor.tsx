@@ -25,7 +25,7 @@ function validateIntro(intro: unknown) {
 }
 
 function validateColor(color: string) {
-  if (!color.match(/#(?<color>[a-f0-9]{6})/)) {
+  if (!color.match(/^#(?<color>[a-f0-9]{6})$/)) {
     return 'Color must be in format #000000';
   }
 }

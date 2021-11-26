@@ -69,7 +69,7 @@ export const action: ActionFunction = async ({ request }) => {
     return json('Hex color must be a string', { status: 400 });
   }
 
-  const matchData = hexColor.match(/#(?<color>[a-f0-9]{6})/);
+  const matchData = hexColor.match(/^#(?<color>[a-f0-9]{6})$/);
 
   if (!matchData || !matchData.groups) {
     return json('Hex color must be in format #000000', { status: 400 });
