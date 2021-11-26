@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   const { username } = params;
 
   if (!username) {
-    throw new Response('No username', { status: 400 });
+    throw new Response('No username.', { status: 400 });
   }
 
   const user = await prisma.user.findFirst({
@@ -29,7 +29,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   });
 
   if (!user) {
-    throw new Response('Not Found', { status: 404 });
+    throw new Response('User does not exist.', { status: 404 });
   }
 
   const data: UsersIdData = {

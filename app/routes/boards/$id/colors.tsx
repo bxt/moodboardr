@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     },
   });
 
-  if (!board) throw new Response('Not Found', { status: 404 });
+  if (!board) throw new Response('Board does not exist.', { status: 404 });
 
   const colorIds = board.colors.map(({ color }) => color);
 

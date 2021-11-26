@@ -35,7 +35,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   });
 
   if (!user) {
-    throw new Response('Not Found', { status: 404 });
+    throw new Response('User does not exist.', { status: 404 });
   }
 
   const data: UsersIdColorsData = {

@@ -44,9 +44,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     },
   });
 
-  if (!board) throw new Response('Not Found', { status: 404 });
+  if (!board) throw new Response('Board does not exist.', { status: 404 });
   if (board.artDirector.id !== userId)
-    throw new Response('Not your board', { status: 403 });
+    throw new Response('Not your board.', { status: 403 });
 
   const data: BoardsIdEditData = {
     board: { ...board, createdAt: board.createdAt.toISOString() },
@@ -74,7 +74,7 @@ export const action: ActionFunction = async ({
     },
   });
 
-  if (!board) throw new Response('Not Found', { status: 404 });
+  if (!board) throw new Response('Board does not exist.', { status: 404 });
   if (board.artDirector.id !== userId)
     throw new Response('Not your board', { status: 403 });
 
