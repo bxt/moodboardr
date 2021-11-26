@@ -26,7 +26,10 @@ export const loader: LoaderFunction = async ({ params }) => {
     select: {
       username: true,
       _count: { select: { colorNames: true } },
-      colorNames: { select: { name: true, color: true } },
+      colorNames: {
+        select: { name: true, color: true },
+        orderBy: { createdAt: 'desc' },
+      },
     },
     where: { username },
   });
