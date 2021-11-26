@@ -1,6 +1,6 @@
 # Welcome to moodboardr!
 
-This is an app to manage colors, color boards and patterns. It is build using [Remix](https://remix.run/docs) as a framework for making React do its thing and [Prisma](https://www.prisma.io/docs/reference) for managing an SQLite database.
+This is an app to manage colors, color boards and patterns. It is build using [Remix](https://remix.run/docs) as a framework for making React do its thing and [Prisma](https://www.prisma.io/docs/reference) for managing an SQLite database. Here' a [GIF showing how the app looks like](https://user-images.githubusercontent.com/639509/143580369-e83ff32b-375c-4954-a454-4d87d28a04e4.gif).
 
 **Heads up:** I'm using this app to learn about Remix, so don't expect any production quality code here.
 
