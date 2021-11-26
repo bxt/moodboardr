@@ -54,6 +54,9 @@ export default function ColorsId() {
             <NavLinkWithActive to="related">Related</NavLinkWithActive>
           </li>
           <li>
+            <NavLinkWithActive to="formats">Formats</NavLinkWithActive>
+          </li>
+          <li>
             <NavLinkWithActive to="collect">Collect</NavLinkWithActive>
           </li>
         </ul>
