@@ -141,6 +141,8 @@ export const meta: MetaFunction = ({
   data: BoardsIdEditData | null;
 }) => {
   return {
-    title: data ? `Editing Board ${data.board.name} on moodboardr` : 'Oops...',
+    title: data?.board?.name
+      ? `Editing Board ${data.board.name} on moodboardr`
+      : 'Oops...',
   };
 };

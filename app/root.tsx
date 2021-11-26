@@ -187,9 +187,19 @@ function Layout({
 export function CatchBoundary() {
   const caught = useCatch();
 
+  const details = caught.data || caught.statusText;
+
   let message: React.ReactNode;
   switch (caught.status) {
     case 401:
+      message = (
+        <p>
+          Oops! Looks like you tried to visit a page that you do not have access
+          to.
+        </p>
+      );
+      break;
+    case 403:
       message = (
         <p>
           Oops! Looks like you tried to visit a page that you do not have access
@@ -203,7 +213,7 @@ export function CatchBoundary() {
       );
       break;
     default:
-      throw new Error(caught.data || caught.statusText);
+      throw new Error(details);
   }
 
   return (
@@ -213,6 +223,7 @@ export function CatchBoundary() {
           {caught.status}: {caught.statusText}
         </h1>
         {message}
+        {details ? <p>{details}</p> : null}
       </Layout>
     </Document>
   );
