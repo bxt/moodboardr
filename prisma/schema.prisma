@@ -44,12 +44,11 @@ model Board {
 }
 
 model ColorsOnBoards {
+  id            String   @id @default(uuid())
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   boardId       String
   board         Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   color         String
   relativeSize  Int
-
-  @@id([color, boardId])
 }
