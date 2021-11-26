@@ -167,6 +167,38 @@ async function seed() {
 
   await db.board.create({
     data: {
+      name: 'Coca-Cola',
+      intro: 'These are some colors I found on a cold drink.',
+      artDirectorId: bxt.id,
+      colors: {
+        create: [
+          {
+            color: 'd7141e',
+            relativeSize: 7,
+          },
+          {
+            color: 'f7f7f7',
+            relativeSize: 3,
+          },
+          {
+            color: '000000',
+            relativeSize: 14,
+          },
+          {
+            color: 'c64210',
+            relativeSize: 1,
+          },
+          {
+            color: '652413',
+            relativeSize: 2,
+          },
+        ],
+      },
+    },
+  });
+
+  await db.board.create({
+    data: {
       name: 'XING Colors',
       intro: 'These are some colors I found on an awesome website called XING.',
       artDirectorId: bxt.id,
@@ -183,6 +215,105 @@ async function seed() {
           {
             color: '9c195b',
             relativeSize: 1,
+          },
+        ],
+      },
+    },
+  });
+
+  await db.board.create({
+    data: {
+      name: 'OG web colors',
+      intro: '',
+      artDirectorId: x11Bot.id,
+      colors: {
+        create: [
+          '000000',
+          'C0C0C0',
+          '808080',
+          'FFFFFF',
+          '800000',
+          'FF0000',
+          '800080',
+          'FF00FF',
+          '008000',
+          '00FF00',
+          '808000',
+          'FFFF00',
+          '000080',
+          '0000FF',
+          '008080',
+          '00FFFF',
+        ].map((color) => ({
+          color,
+          relativeSize: 1,
+        })),
+      },
+    },
+  });
+
+  await db.board.create({
+    data: {
+      name: 'Blackpink',
+      intro: '',
+      artDirectorId: bxt.id,
+      colors: {
+        create: [
+          {
+            color: 'f01997',
+            relativeSize: 3,
+          },
+          {
+            color: 'c0ffee',
+            relativeSize: 1,
+          },
+          {
+            color: '000000',
+            relativeSize: 2,
+          },
+        ],
+      },
+    },
+  });
+
+  await db.board.create({
+    data: {
+      name: 'Golden Ratio',
+      intro: '',
+      artDirectorId: bxt.id,
+      colors: {
+        create: [
+          {
+            color: 'cba02a',
+            relativeSize: 62,
+          },
+          {
+            color: 'a33724',
+            relativeSize: 38,
+          },
+        ],
+      },
+    },
+  });
+
+  await db.board.create({
+    data: {
+      name: 'Langweiliger als Bernd das Brot, richtig grau und Öde',
+      intro: '',
+      artDirectorId: bxt.id,
+      colors: {
+        create: [
+          {
+            color: 'c3cea3',
+            relativeSize: 3,
+          },
+          {
+            color: '2b3b37',
+            relativeSize: 1,
+          },
+          {
+            color: '8e7b86',
+            relativeSize: 2,
           },
         ],
       },
